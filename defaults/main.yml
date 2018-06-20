@@ -1,0 +1,21 @@
+---
+# defaults file for ivansible.dev-ansible
+
+dev_ansible_dir: ~/.ansible/venv
+
+dev_ansible_link_dir: ~/bin
+dev_ansible_remake_links: no
+
+dev_ansible_update_bashrc: yes
+
+dev_ansible_python: python3
+
+dev_ansible_system_packages:
+  - "{{ dev_ansible_python }}"
+  - "{{ dev_ansible_python }}-dev"
+  - virtualenv
+  - build-essential
+  # Ansible relies on `sshpass` when using SSH passwords
+  # See http://docs.ansible.com/ansible/latest/user_guide/intro_bsd.html
+  - sshpass
+...

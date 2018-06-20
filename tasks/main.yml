@@ -1,0 +1,73 @@
+---
+# tasks file for dev-ivansible
+
+- block:
+    - name: upload pip requirements
+      copy:
+        src: requirements.txt
+        dest: "{{ dev_ansible_dir }}/"
+
+    - name: install system packages
+      apt:
+        name: "{{ dev_ansible_system_packages }}"
+      become: true
+
+    - name: setup virtual environment
+      pip:
+        requirements: "{{ dev_ansible_dir }}/requirements.txt"
+        virtualenv: "{{ dev_ansible_dir }}"
+        virtualenv_python: "{{ dev_ansible_python }}"
+      register: pip_venv_result
+  tags: dev_ansible_venv
+
+
+- block:
+    - set_fact:
+        bin_dir: "{{ dev_ansible_dir | expanduser }}/bin"
+        link_dir: "{{ dev_ansible_link_dir | expanduser }}"
+
+    - name: directory for links to ansible binaries
+      file:
+        path: "{{ link_dir }}"
+        state: directory
+      register: link_dir_result
+
+    - name: links for ansible binaries
+      shell: >
+        for bin in ansible* ; do
+          ln -sf \
+            "{{ bin_dir | relpath(link_dir) }}/$bin" \
+            "{{ link_dir }}/"
+        done
+      args:
+        chdir: "{{ bin_dir }}"
+      when: "pip_venv_result is changed
+             or link_dir_result is changed
+             or dev_ansible_remake_links | bool == true"
+  when: "dev_ansible_link_dir != ''"
+  tags: dev_ansible_links
+
+
+- block:
+    - name: find bashrc.local file
+      shell: |
+        ls .bashrc.local
+        ls .bashrc
+        ls .bash_profile
+        ls .profile
+      args:
+        chdir: "{{ ansible_user_dir }}"
+      changed_when: false
+      failed_when: false
+      register: bashrc_list
+      tags: dev_ansible_bashrc
+
+    - name: add link directory on the path
+      lineinfile:
+        path: "~/{{ bashrc_list.stdout_lines | first }}"
+        line: "export PATH={{ dev_ansible_link_dir }}:$PATH"
+        state: present
+  when: "dev_ansible_link_dir != ''
+         and dev_ansible_update_bashrc | bool == true"
+  tags: dev_ansible_bashrc
+...

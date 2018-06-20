@@ -1,0 +1,5 @@
+ansible
+pywinrm
+passlib
+jmespath
+ansible-inventory-grapher
