@@ -3,3 +3,5 @@ pywinrm
 passlib
 jmespath
 ansible-inventory-grapher
+# docker-py has been superseded by docker
+docker
