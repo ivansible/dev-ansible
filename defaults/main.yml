@@ -1,5 +1,5 @@
 ---
-# defaults file for ivansible.dev-ansible
+# defaults file for ivansible.dev_ansible
 
 dev_ansible_dir: ~/.ansible/venv
 

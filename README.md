@@ -1,6 +1,6 @@
-# Role ivansible.dev-ansible
+# ivansible.dev_ansible
 
-This script will install ansible in a virtual environment under user
+This role will install ansible in a virtual environment under user
 home directory (as described in the
 [installation guide](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#latest-releases-via-pip)),
 put links to ansible binaries in the `~/bin` link directory
@@ -49,7 +49,7 @@ None
 
     - hosts: vag2
       roles:
-        - role: ivansible.dev-ansible
+        - role: ivansible.dev_ansible
 
 
 ## License
