@@ -4,7 +4,6 @@
 dev_ansible_dir: ~/.ansible/venv
 
 dev_ansible_link_dir: ~/bin
-dev_ansible_remake_links: no
 
 dev_ansible_update_bashrc: yes
 

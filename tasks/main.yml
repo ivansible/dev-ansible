@@ -41,9 +41,7 @@
         done
       args:
         chdir: "{{ bin_dir }}"
-      when: "pip_venv_result is changed
-             or link_dir_result is changed
-             or dev_ansible_remake_links | bool == true"
+        creates: "{{ link_dir }}/ansible-playbook"
   when: "dev_ansible_link_dir != ''"
   tags: dev_ansible_links
 
