@@ -47,22 +47,11 @@
 
 
 - block:
-    - name: find bashrc.local file
-      shell: |
-        ls .bashrc.local
-        ls .bashrc
-        ls .bash_profile
-        ls .profile
-      args:
-        chdir: "{{ ansible_user_dir }}"
-      changed_when: false
-      failed_when: false
-      register: bashrc_list
-      tags: dev_ansible_bashrc
-
     - name: add link directory on the path
       lineinfile:
-        path: "~/{{ bashrc_list.stdout_lines | first }}"
+        # path file must correspond with role ivansible.dev_user
+        # https://github.com/ivansible/dev-user/blob/master/tasks/bashrc.yml
+        path: ~/.local/bashrc/2path.sh
         line: "export PATH={{ dev_ansible_link_dir }}:$PATH"
         state: present
   when: "dev_ansible_link_dir != ''
