@@ -22,9 +22,10 @@
 
 
 - block:
-    - set_fact:
-        bin_dir: "{{ dev_ansible_dir | expanduser }}/bin"
-        link_dir: "{{ dev_ansible_link_dir | expanduser }}"
+    - name: expand home directory in parameters
+      set_fact:
+        bin_dir: "{{ dev_ansible_dir |expanduser }}/bin"
+        link_dir: "{{ dev_ansible_link_dir |expanduser }}"
 
     - name: directory for links to ansible binaries
       file:
@@ -55,6 +56,6 @@
         line: "export PATH={{ dev_ansible_link_dir }}:$PATH"
         state: present
   when: "dev_ansible_link_dir != ''
-         and dev_ansible_update_bashrc | bool == true"
+         and dev_ansible_update_bashrc |bool"
   tags: dev_ansible_bashrc
 ...
