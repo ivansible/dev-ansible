@@ -43,6 +43,16 @@
       args:
         chdir: "{{ bin_dir }}"
         creates: "{{ link_dir }}/ansible-playbook"
+
+    - name: links for ansible flavored pip and python
+      file:
+        state: link
+        src: "{{ bin_dir | relpath(link_dir) }}/{{ item }}"
+        dest: "{{ link_dir }}/ansible-{{ item }}"
+      loop:
+        - pip
+        - python
+
   when: "dev_ansible_link_dir != ''"
   tags: dev_ansible_links
 
