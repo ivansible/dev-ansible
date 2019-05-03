@@ -65,7 +65,13 @@
         path: ~/.local/bashrc/2path.sh
         line: "export PATH={{ dev_ansible_link_dir }}:$PATH"
         state: present
-  when: "dev_ansible_link_dir != ''
-         and dev_ansible_update_bashrc |bool"
+      when: "dev_ansible_link_dir != ''"
+
+    - name: alias for ansible-playbook
+      lineinfile:
+        path: ~/.local/bashrc/4alias.sh
+        line: "alias ap='ansible-playbook'"
+
+  when: "dev_ansible_update_bashrc |bool"
   tags: dev_ansible_bashrc
 ...
