@@ -2,22 +2,24 @@
 # tasks file for dev-ivansible
 
 - block:
-    - name: upload pip requirements
-      copy:
-        src: requirements.txt
-        dest: "{{ dev_ansible_dir }}/"
-
     - name: install system packages
       apt:
         name: "{{ dev_ansible_system_packages }}"
       become: true
 
+    - name: upload pip requirements
+      copy:
+        src: requirements.txt
+        dest: "{{ dev_ansible_package_list }}"
+        mode: 0644
+      register: pip_requirements_result
+
     - name: setup virtual environment
       pip:
-        requirements: "{{ dev_ansible_dir }}/requirements.txt"
+        requirements: "{{ dev_ansible_package_list }}"
         virtualenv: "{{ dev_ansible_dir }}"
         virtualenv_python: "{{ dev_ansible_python }}"
-      register: pip_venv_result
+      when: pip_requirements_result is changed
   tags: dev_ansible_venv
 
 

@@ -5,3 +5,5 @@ jmespath
 ansible-inventory-grapher
 # docker-py has been superseded by docker
 docker
+# netaddr is required by ipaddr filter
+netaddr

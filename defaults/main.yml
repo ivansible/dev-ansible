@@ -2,6 +2,7 @@
 # defaults file for ivansible.dev_ansible
 
 dev_ansible_dir: "{{ ansible_user_dir }}/.ansible/venv"
+dev_ansible_package_list: "{{ dev_ansible_dir |dirname }}/requirements.txt"
 
 dev_ansible_link_dir: "{{ ansible_user_dir }}/bin"
 
