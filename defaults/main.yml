@@ -2,7 +2,7 @@
 # defaults file for ivansible.dev_ansible
 
 dev_ansible_dir: "{{ ansible_user_dir }}/.ansible/venv"
-dev_ansible_package_list: "{{ dev_ansible_dir |dirname }}/requirements.txt"
+dev_ansible_package_list: "{{ dev_ansible_dir |dirname }}/ansible-requirements.txt"
 
 dev_ansible_link_dir: "{{ ansible_user_dir }}/bin"
 
@@ -11,11 +11,33 @@ dev_ansible_update_bashrc: yes
 dev_ansible_python: python3
 
 dev_ansible_system_packages:
+  - build-essential
+  - virtualenv
   - "{{ dev_ansible_python }}"
   - "{{ dev_ansible_python }}-dev"
-  - virtualenv
-  - build-essential
-  # Ansible relies on `sshpass` when using SSH passwords
-  # See http://docs.ansible.com/ansible/latest/user_guide/intro_bsd.html
+  - "{{ dev_ansible_python }}-virtualenv"
+  - "{{ dev_ansible_python }}-pip"
+  # requisites for molecule:
+  - libffi-dev
+  - libssl-dev
+  # requisites for inventory grapher:
+  - graphviz
+  - imagemagick
+  - x11-apps
+  - x11-xserver-utils
+  - xauth
+  # ansible relies on `sshpass` when using SSH passwords
   - sshpass
+
+dev_ansible_linked_binaries:
+  pip: ansible-pip
+  python: ansible-python
+  # for molecule tests:
+  molecule: molecule
+  yamllint: yamllint
+  flake8: flake8
+  pytest: pytest
+  # 'ansible' binary without dash hinders tab completion, so we add a suffix
+  # any letter in suffix results in failure but digits work.
+  ansible: ansible-0
 ...

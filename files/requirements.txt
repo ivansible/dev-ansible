@@ -1,9 +1,13 @@
 ansible
+# molecule pulls: ansible-lint yamllint flake8 pytest testinfra
+molecule
+docker
+ansible-test
+# utils
+ansible-inventory-grapher
 pywinrm
 passlib
+# jmespath is required by json_query filter
 jmespath
-ansible-inventory-grapher
-# docker-py has been superseded by docker
-docker
 # netaddr is required by ipaddr filter
 netaddr
