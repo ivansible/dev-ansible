@@ -38,6 +38,7 @@ Python version to use for ansible: `python` or `python3`.
 - `dev_ansible_venv` -- setup virtual environment
 - `dev_ansible_links` -- create links to ansible binaries
 - `dev_ansible_bashrc` -- update path in the local profile
+- `dev_ansible_all` -- all of above
 
 
 ## Dependencies
