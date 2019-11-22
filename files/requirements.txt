@@ -2,6 +2,7 @@ ansible
 # molecule pulls: ansible-lint yamllint flake8 pytest testinfra
 molecule
 docker
+mitogen
 ansible-test
 # utils
 ansible-inventory-grapher
