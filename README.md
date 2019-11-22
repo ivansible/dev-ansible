@@ -32,11 +32,18 @@ Allows to add link directory on the local profile
 
 Python version to use for ansible: `python` or `python3`.
 
+    dev_ansible_apply_patches: true
+This flag enables patching ansible, mitogen and molecule:
+  - molecule patch adds support for `MOLECULE_TARGET` environment variable
+  - ansible restconf patch fixes the "JSON object must be str" error on xenial
+  - mitogen patch fixes the "pending work still existed after shutdown" warning on micro-servers
+
 
 ## Tags
 
 - `dev_ansible_install` -- setup virtual environment and install ansible
 - `dev_ansible_upgrade` -- upgrade old ansible 2.8 pre-installed on vagrant
+- `dev_ansible_patch` -- apply patches to ansible, mitogen and molecule
 - `dev_ansible_links` -- create links to ansible binaries
 - `dev_ansible_bashrc` -- update path in the local profile
 - `dev_ansible_all` -- all of above

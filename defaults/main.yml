@@ -41,4 +41,6 @@ dev_ansible_linked_binaries:
   # 'ansible' binary without dash hinders tab completion, so we add a suffix
   # any letter in suffix results in failure but digits work.
   ansible: ansible-0
+
+dev_ansible_apply_patches: true
 ...

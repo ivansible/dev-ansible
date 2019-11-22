@@ -1,0 +1,11 @@
+--- .ansible/venv/site-packages/mitogen/core.py.bak	2020-03-11 14:51:58.650750723 +0300
++++ .ansible/venv/site-packages/mitogen/core.py	2020-03-11 14:52:26.954968516 +0300
+@@ -3367,7 +3367,7 @@
+ 
+     #: Seconds grace to allow :class:`streams <Stream>` to shutdown gracefully
+     #: before force-disconnecting them during :meth:`shutdown`.
+-    shutdown_timeout = 3.0
++    shutdown_timeout = 9.0
+ 
+     def __init__(self, poller_class=None, activate_compat=True):
+         self._alive = True

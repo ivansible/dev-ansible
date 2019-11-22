@@ -1,0 +1,12 @@
+diff -up .venv/lib/python3.5/site-packages/molecule/command/base.py.bak .venv/lib/python3.5/site-packages/molecule/command/base.py
+--- a/molecule/command/base.py	2019-11-22 14:11:00.211596905 +0300
++++ b/molecule/command/base.py	2019-11-22 14:11:07.359654782 +0300
+@@ -33,7 +33,7 @@ from molecule import util
+ 
+ LOG = logger.get_logger(__name__)
+ MOLECULE_GLOB = os.environ.get('MOLECULE_GLOB', 'molecule/*/molecule.yml')
+-MOLECULE_DEFAULT_SCENARIO_NAME = 'default'
++MOLECULE_DEFAULT_SCENARIO_NAME = os.environ.get('MOLECULE_TARGET', 'default')
+ 
+ 
+ @six.add_metaclass(abc.ABCMeta)
