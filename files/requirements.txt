@@ -6,6 +6,8 @@ mitogen
 ansible-test
 # utils
 ansible-inventory-grapher
+git+https://github.com/ivandeex/ansigenome.git@master
+# extensions
 pywinrm
 passlib
 # jmespath is required by json_query filter

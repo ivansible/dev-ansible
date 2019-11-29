@@ -32,6 +32,7 @@ dev_ansible_system_packages:
 dev_ansible_linked_binaries:
   pip: ansible-pip
   python: ansible-python
+  ansigenome: ansible-genome
   # for molecule tests:
   molecule: molecule
   yamllint: yamllint
