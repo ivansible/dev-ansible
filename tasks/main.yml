@@ -63,12 +63,16 @@
 
 - block:
     - name: add link directory on the path
-      lineinfile:
+      blockinfile:
         # path file must correspond with role ivansible.dev_user
         # https://github.com/ivansible/dev-user/blob/master/tasks/bashrc.yml
         path: ~/.local/bashrc/2path.sh
-        line: "export PATH={{ dev_ansible_link_dir }}:$PATH"
+        block: |
+          if [ -n "${PATH##*{{ dev_ansible_link_dir }}}" ] && [ -n "${PATH##*{{ dev_ansible_link_dir }}:*}" ]; then
+              export PATH={{ dev_ansible_link_dir }}:$PATH
+          fi
         state: present
+        marker: "# == {mark} ANSIBLE PATHS =="
       when: dev_ansible_link_dir != '' # noqa 602
 
     - name: alias for ansible-playbook
