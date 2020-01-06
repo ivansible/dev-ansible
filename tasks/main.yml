@@ -55,7 +55,7 @@
         dest: "{{ link_dir }}/{{ item.1 }}"
       loop: "{{ dev_ansible_linked_binaries |dictsort }}"
 
-  when: dev_ansible_link_dir != '' # noqa 602
+  when: dev_ansible_link_dir != ''  # noqa 602
   tags:
     - dev_ansible_links
     - dev_ansible_all
@@ -72,8 +72,8 @@
               export PATH={{ dev_ansible_link_dir }}:$PATH
           fi
         state: present
-        marker: "# == {mark} ANSIBLE PATHS =="
-      when: dev_ansible_link_dir != '' # noqa 602
+        marker: '# == {mark} ANSIBLE PATHS =='
+      when: dev_ansible_link_dir != ''  # noqa 602
 
     - name: alias for ansible-playbook
       lineinfile:

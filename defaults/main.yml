@@ -1,12 +1,12 @@
 ---
-# defaults file for ivansible.dev_ansible
+# defaults for ivansible.dev_ansible
 
 dev_ansible_dir: "{{ ansible_user_dir }}/.ansible/venv"
 dev_ansible_package_list: "{{ dev_ansible_dir |dirname }}/ansible-requirements.txt"
 
 dev_ansible_link_dir: "{{ ansible_user_dir }}/bin"
 
-dev_ansible_update_bashrc: yes
+dev_ansible_update_bashrc: true
 
 dev_ansible_python: python3
 

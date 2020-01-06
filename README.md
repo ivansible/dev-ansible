@@ -24,7 +24,7 @@ Directory with ansible virtual environment
 
 Directory to put links to ansible binaries
 
-    dev_ansible_update_bashrc: yes
+    dev_ansible_update_bashrc: true
 
 Allows to add link directory on the local profile
 
@@ -60,4 +60,4 @@ MIT
 
 ## Author Information
 
-Created in 2018 by [IvanSible](https://github.com/ivansible)
+Created in 2018-2020 by [IvanSible](https://github.com/ivansible)
