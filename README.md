@@ -35,7 +35,8 @@ Python version to use for ansible: `python` or `python3`.
 
 ## Tags
 
-- `dev_ansible_venv` -- setup virtual environment
+- `dev_ansible_install` -- setup virtual environment and install ansible
+- `dev_ansible_upgrade` -- upgrade old ansible 2.8 pre-installed on vagrant
 - `dev_ansible_links` -- create links to ansible binaries
 - `dev_ansible_bashrc` -- update path in the local profile
 - `dev_ansible_all` -- all of above

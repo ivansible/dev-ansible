@@ -1,4 +1,4 @@
-ansible
+ansible>=2.9
 # molecule pulls: ansible-lint yamllint flake8 pytest testinfra
 molecule
 docker

@@ -1,7 +1,8 @@
 ---
 # tasks for ivansible.dev-ansible
 
-- block:
+- name: install ansible packages
+  block:
     - name: install system packages
       apt:
         name: "{{ dev_ansible_system_packages }}"
@@ -16,16 +17,37 @@
 
     - name: setup virtual environment
       pip:
+        state: present
         requirements: "{{ dev_ansible_package_list }}"
         virtualenv: "{{ dev_ansible_dir }}"
         virtualenv_python: "{{ dev_ansible_python }}"
       when: pip_requirements_result is changed
   tags:
-    - dev_ansible_venv
+    - dev_ansible_install
     - dev_ansible_all
 
 
-- block:
+- name: workaround for old ansible pre-installed on vagrant
+  block:
+    - name: check installed ansible version
+      command: "{{ dev_ansible_dir }}/bin/ansible --version"
+      changed_when: false
+      register: ansible_version_result
+
+    - name: upgrade virtual environment if it has old ansible 2.8
+      pip:
+        state: latest
+        requirements: "{{ dev_ansible_package_list }}"
+        virtualenv: "{{ dev_ansible_dir }}"
+      tags: skip_ansible_lint  # noqa 403 (latest is intended)
+      when: "'ansible 2.8' in ansible_version_result.stdout"
+  tags:
+    - dev_ansible_upgrade
+    - dev_ansible_all
+
+
+- name: convenient links for user-local ansible binaries
+  block:
     - name: expand home directory in parameters
       set_fact:
         bin_dir: "{{ dev_ansible_dir |expanduser }}/bin"
@@ -61,7 +83,8 @@
     - dev_ansible_all
 
 
-- block:
+- name: convenient ansible aliases in users profile
+  block:
     - name: add link directory on the path
       blockinfile:
         # path file must correspond with role ivansible.dev_user
