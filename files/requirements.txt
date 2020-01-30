@@ -14,3 +14,5 @@ passlib
 jmespath
 # netaddr is required by ipaddr filter
 netaddr
+# boto3 is required by cloudfront_distribution
+boto3
