@@ -1,9 +1,14 @@
-ansible>=2.9
-# molecule pulls: ansible-lint yamllint flake8 pytest testinfra
-molecule
+ansible>2.9
 docker
 mitogen
+# tests
+molecule>3
 ansible-test
+ansible-lint
+yamllint
+testinfra
+pytest
+flake8
 # utils
 ansible-inventory-grapher
 git+https://github.com/ivandeex/ansigenome.git@master
