@@ -40,7 +40,7 @@ dev_ansible_linked_binaries:
   pytest: pytest
   # 'ansible' binary without dash hinders tab completion, so we add a suffix
   # any letter in suffix results in failure but digits work.
-  ansible: ansible-0
+  ansible: ansible-1
 
 dev_ansible_apply_patches: true
 ...
