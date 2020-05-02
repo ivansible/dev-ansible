@@ -40,7 +40,9 @@
         requirements: "{{ dev_ansible_package_list }}"
         virtualenv: "{{ dev_ansible_dir }}"
       tags: skip_ansible_lint  # noqa 403 (latest is intended)
-      when: "'ansible 2.8' in ansible_version_result.stdout"
+      ## detection get skipped and produces no output in check mode
+      when: not ansible_check_mode
+            and 'ansible 2.8' in ansible_version_result.stdout
   tags:
     - dev_ansible_upgrade
     - dev_ansible_all
@@ -95,8 +97,9 @@
         dest: "{{ dev_ansible_dir }}/site-packages/mitogen/core.py"
         backup: true
       ignore_errors: true
-  when: dev_ansible_apply_patches |bool
-        and not ansible_check_mode  # detection task produces no output in check mode
+  ## detection task produces no output in check mode
+  when: not ansible_check_mode
+        and dev_ansible_apply_patches |bool
   tags:
     - dev_ansible_patch
     - dev_ansible_all
