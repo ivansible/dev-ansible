@@ -135,8 +135,10 @@
         src: "{{ bin_dir | relpath(link_dir) }}/{{ item.0 }}"
         dest: "{{ link_dir }}/{{ item.1 }}"
       loop: "{{ dev_ansible_linked_binaries |dictsort }}"
+      loop_control:
+        label: "{{ item.1 }}"
 
-  when: dev_ansible_link_dir != ''  # noqa 602
+  when: dev_ansible_link_dir |d('')
   tags:
     - dev_ansible_links
     - dev_ansible_all
