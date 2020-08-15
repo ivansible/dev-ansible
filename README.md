@@ -1,5 +1,10 @@
 # ivansible.dev_ansible
 
+[![Github Test Status](https://github.com/ivansible/dev-ansible/workflows/Molecule%20test/badge.svg?branch=master)](https://github.com/ivansible/dev-ansible/actions)
+[![Travis Test Status](https://travis-ci.org/ivansible/dev-ansible.svg?branch=master)](https://travis-ci.org/ivansible/dev-ansible)
+[![Ansible Galaxy](https://img.shields.io/badge/galaxy-ivansible.dev__ansible-68a.svg?style=flat)](https://galaxy.ansible.com/ivansible/dev_ansible/)
+
+
 This role will install ansible in a virtual environment under user
 home directory (as described in the
 [installation guide](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#latest-releases-via-pip)),
