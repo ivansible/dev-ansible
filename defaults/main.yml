@@ -17,6 +17,7 @@ dev_ansible_system_packages:
   - "{{ dev_ansible_python }}-dev"
   - "{{ dev_ansible_python }}-virtualenv"
   - "{{ dev_ansible_python }}-pip"
+  - "{{ dev_ansible_python }}-setuptools"
   # requisites for molecule:
   - libffi-dev
   - libssl-dev

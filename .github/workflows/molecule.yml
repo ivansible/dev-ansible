@@ -43,7 +43,8 @@ jobs:
         run: |
           # stock and pypy flavors of PyYAML are incompatible:
           sudo apt-get remove -q -y python3-yaml
-          sudo -H pip3 install -U pip setuptools wheel
+          # setuptools 50.0.x breaks tests on travis
+          sudo -H pip3 install -U pip wheel 'setuptools!=50.0.*'
           sudo -H pip3 install docker jmespath netaddr boto3 mitogen molecule pytest testinfra
           # also pulled: ansible-lint yamllint flake8
 

@@ -17,7 +17,8 @@ before_install:
   - ln -s $TRAVIS_BUILD_DIR $(dirname $TRAVIS_BUILD_DIR)/$ROLE_NAME
 
 install:
-  - pip3 install -U pip setuptools wheel
+  # setuptools 50.0.x breaks tests on travis
+  - pip3 install -U pip wheel 'setuptools!=50.0.*'
   - pip3 install jmespath netaddr boto3 mitogen molecule pytest testinfra
   - pip3 install "docker<4"  # prevent issues with ancient docker on travis xenial
   # also pulled: ansible-lint yamllint flake8

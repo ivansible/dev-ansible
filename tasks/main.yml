@@ -3,10 +3,20 @@
 
 - name: install ansible packages
   block:
-    - name: install system packages
-      apt:
-        name: "{{ dev_ansible_system_packages }}"
-      become: true
+    - name: install system packages for ansible
+      block:
+        - name: install system packages (will rescue if it fails)
+          apt:
+            name: "{{ dev_ansible_system_packages }}"
+          become: true
+          ## reduce long error message
+          no_log: "{{ hide_secrets |bool }}"
+      rescue:
+        - name: install system packages (update cache)
+          apt:
+            name: "{{ dev_ansible_system_packages }}"
+            update_cache: true
+          become: true
 
     - name: upload pip requirements
       copy:
