@@ -1,13 +1,13 @@
-ansible>2.9,<2.10
+ansible==2.9.14
 docker
-mitogen
+mitogen<0.3
 # tests
-molecule>3
+molecule[docker]<3.2
 ansible-test
 ansible-lint
 yamllint
-testinfra
 pytest
+pytest-testinfra
 flake8
 # utils
 ansible-inventory-grapher
