@@ -144,7 +144,7 @@
         state: link
         src: "{{ bin_dir | relpath(link_dir) }}/{{ item.0 }}"
         dest: "{{ link_dir }}/{{ item.1 }}"
-      loop: "{{ dev_ansible_linked_binaries |dictsort }}"
+      loop: "{{ dev_ansible_linked_binaries }}"
       loop_control:
         label: "{{ item.1 }}"
 

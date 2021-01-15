@@ -31,17 +31,18 @@ dev_ansible_system_packages:
   - sshpass
 
 dev_ansible_linked_binaries:
-  pip: ansible-pip
-  python: ansible-python
-  ansigenome: ansible-genome
+  - [pip, ansible-pip]
+  - [python, ansible-python]
+  - [ansigenome, ansible-genome]
   # for molecule tests:
-  molecule: molecule
-  yamllint: yamllint
-  flake8: flake8
-  pytest: pytest
+  - [molecule, molecule]
+  - [yamllint, yamllint]
+  - [flake8, flake8]
+  - [pytest, pytest]
+  - [ansible, ansible]
   # 'ansible' binary without dash hinders tab completion, so we add a suffix
   # any letter in suffix results in failure but digits work.
-  ansible: ansible-1
+  - [ansible, ansible-1]
 
 dev_ansible_apply_patches: true
 ...
