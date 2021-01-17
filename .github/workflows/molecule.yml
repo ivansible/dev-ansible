@@ -12,8 +12,6 @@ on:
 env:
   ROLE_NAME: ivansible.dev_ansible
   ANSIBLE_FORCE_COLOR: true
-  IVATEST_SSH_SERVER: false
-  IVATEST_FIREWALL: none
 
 jobs:
   localhost_test:

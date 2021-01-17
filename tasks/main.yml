@@ -126,6 +126,7 @@
       file:
         path: "{{ link_dir }}"
         state: directory
+        mode: 0755
       register: link_dir_result
 
     - name: links for ansible-prefixed binaries
