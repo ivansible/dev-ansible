@@ -1,7 +1,6 @@
 # ivansible.dev_ansible
 
-[![Github Test Status](https://github.com/ivansible/dev-ansible/workflows/Molecule%20test/badge.svg?branch=master)](https://github.com/ivansible/dev-ansible/actions)
-[![Travis Test Status](https://travis-ci.org/ivansible/dev-ansible.svg?branch=master)](https://travis-ci.org/ivansible/dev-ansible)
+[![Github Test Status](https://github.com/ivansible/dev-ansible/workflows/test/badge.svg?branch=master)](https://github.com/ivansible/dev-ansible/actions)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-ivansible.dev__ansible-68a.svg?style=flat)](https://galaxy.ansible.com/ivansible/dev_ansible/)
 
 
@@ -73,4 +72,4 @@ MIT
 
 ## Author Information
 
-Created in 2018-2020 by [IvanSible](https://github.com/ivansible)
+Created in 2018-2021 by [IvanSible](https://github.com/ivansible)
