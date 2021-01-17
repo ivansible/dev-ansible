@@ -34,17 +34,29 @@ jobs:
         with:
           path: ivansible/${{ env.ROLE_NAME }}
 
-      - name: Install requisites
+      - name: Fix pip issues on ci/cd xenial
+        if: ${{ matrix.os == 'ubuntu-16.04' }}
         shell: bash
         run: |
           # stock and pypy flavors of PyYAML are incompatible
           sudo apt-get remove -q -y python3-yaml
-          # pip 21 will drop python 3.5 support
-          sudo -H pip3 install -U "pip<21" setuptools wheel
-          # cryptography 2.9 has sane xenial wheels, works with old openssl
-          if [[ "${{ matrix.os }}" = "ubuntu-16.04" ]]; then sudo -H pip3 install "cryptography==2.9"; fi
+          sudo apt-get install -q -y libyaml-dev
+          sudo -H pip3 install -U "pip==20.3.3" "setuptools==50.3.2" "wheel==0.36.2"
+          sudo -H pip3 install "cryptography==2.9"
+          sudo -H pip3 install "pyyaml==5.3.1"
+
+      - name: Upgrade pip on ci/cd bionic
+        if: ${{ matrix.os != 'ubuntu-16.04' }}
+        shell: bash
+        run: |
+          sudo apt-get remove -q -y python3-yaml
+          sudo -H pip3 install -U pip setuptools wheel
+
+      - name: Install requisites
+        shell: bash
+        run: |
           # postpone ansible 2.10, molecule 3.2
-          sudo -H pip3 install "ansible<2.10"
+          sudo -H pip3 install "ansible==2.9.14"
           sudo -H pip3 install "mitogen<0.3"
           sudo -H pip3 install "molecule[docker]<3.2"
           # pull dependencies
@@ -73,12 +85,10 @@ jobs:
       - name: Install requisites
         shell: bash
         run: |
-          # stock and pypy flavors of PyYAML are incompatible
           sudo apt-get remove -q -y python3-yaml
-          # pip 21 will drop python 3.5 support
-          sudo -H pip3 install -U "pip<21" setuptools wheel
+          sudo -H pip3 install -U pip setuptools wheel
           # postpone ansible 2.10, molecule 3.2
-          sudo -H pip3 install "ansible<2.10"
+          sudo -H pip3 install "ansible==2.9.14"
           sudo -H pip3 install "mitogen<0.3"
           sudo -H pip3 install "molecule[docker]<3.2"
           # pull dependencies
