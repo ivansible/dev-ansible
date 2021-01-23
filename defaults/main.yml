@@ -15,6 +15,7 @@ dev_ansible_system_packages:
   - virtualenv
   - "{{ dev_ansible_python }}"
   - "{{ dev_ansible_python }}-dev"
+  - "{{ dev_ansible_python }}-venv"
   - "{{ dev_ansible_python }}-virtualenv"
   - "{{ dev_ansible_python }}-pip"
   - "{{ dev_ansible_python }}-setuptools"
