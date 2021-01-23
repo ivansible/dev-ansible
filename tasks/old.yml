@@ -1,0 +1,19 @@
+---
+## workaround for old ansible pre-installed on vagrant
+
+- name: check installed ansible version (ok to fail)
+  command: "{{ dev_ansible_dir }}/bin/ansible --version"
+  changed_when: false
+  register: ansible_version_result
+
+- name: upgrade virtual environment if it has old ansible 2.8
+  pip:
+    state: latest
+    requirements: "{{ dev_ansible_package_list }}"
+    virtualenv: "{{ dev_ansible_dir }}"
+  tags: skip_ansible_lint  # noqa 403 (latest is intended)
+  ## detection get skipped and produces no output in check mode
+  when:
+    - not ansible_check_mode
+    - ansible_version_result.stdout |d('') is search('ansible 2.8')
+...

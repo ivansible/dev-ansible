@@ -1,0 +1,50 @@
+---
+## apply patches to ansible, mitogen and molecule
+
+- name: detect site-packages directory
+  shell:
+    cmd: |
+      from __future__ import print_function
+      import sys
+      [print(dir) for dir in sys.path if dir.endswith('site-packages')]
+    executable: "{{ dev_ansible_dir }}/bin/python"
+  changed_when: false
+  register: detect_site_packages_result
+
+- name: create symbolic link for site-packages
+  file:
+    state: link
+    src: "{{ site_packages |relpath(venv_dir) }}"
+    dest: "{{ venv_dir }}/site-packages"
+  vars:
+    site_packages: "{{ detect_site_packages_result.stdout_lines |first }}"
+    venv_dir: "{{ dev_ansible_dir |expanduser }}"
+
+- name: patch molecule to get scenario from MOLECULE_TARGET
+  patch:
+    src: molecule-target.patch
+    dest: "{{ dev_ansible_dir }}/site-packages/molecule/command/base.py"
+    backup: true
+  ignore_errors: true
+
+- name: patch ansible restconf (fix "JSON object must be str")
+  patch:
+    src: ansible-restconf.patch
+    dest: "{{ dev_ansible_dir }}/site-packages/ansible/plugins/httpapi/restconf.py"
+    backup: true
+  ignore_errors: true
+  ## the issue manifests itself as error "JSON object must be str"
+  ## in the custom restconf_config2 module used by ndm- keenetic roles
+  ## because in python 3.5 on xenial json.loads() accepts only type 'str';
+  ## in python 3.6 on bionic json.loads() accepts and converts 'bytes'
+  ## and the problem is no more, so we skip the patch on bionic and later.
+  ## python 2.7 also has this bug but is not used by ansible.
+  when: ansible_lsb.codename == 'xenial'
+
+- name: patch mitogen (fix "pending work still existed after shutdown")
+  patch:
+    src: mitogen-shutdown.patch
+    dest: "{{ dev_ansible_dir }}/site-packages/mitogen/core.py"
+    backup: true
+  ignore_errors: true
+...

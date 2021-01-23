@@ -1,0 +1,26 @@
+---
+## virtualenv hacks for bloody xenial
+
+- name: install venv on xenial
+  apt:
+    name: "{{ dev_ansible_python }}-venv"
+  become: true
+
+- name: use venv instead of buggy virtualenv on xenial
+  command:
+    argv:
+      - "{{ dev_ansible_python }}"
+      - -m
+      - venv
+      - "{{ dev_ansible_dir }}"
+    creates: "{{ dev_ansible_dir }}"
+
+- name: fix setuptools version on xenial, prevent syntax error
+  pip:
+    name:
+      - pip==20.3.3         # pip 21 will deprecate python 3.5
+      - setuptools==50.3.2  # setuptools 51.3.x triggers syntax error
+      - wheel==0.36.2       # this version has been tested and approved
+    virtualenv: "{{ dev_ansible_dir }}"
+    virtualenv_python: "{{ dev_ansible_python }}"
+...

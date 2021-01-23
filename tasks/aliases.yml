@@ -1,0 +1,21 @@
+---
+## convenient ansible aliases in users profile
+
+- name: add link directory on the path
+  blockinfile:
+    ## path file must correspond with role ivansible.dev_user
+    ## https://github.com/ivansible/dev-user/blob/master/tasks/bashrc.yml
+    path: ~/.local/bashrc/2path.sh
+    block: |
+      if [ -n "${PATH##*{{ dev_ansible_link_dir }}}" ] && [ -n "${PATH##*{{ dev_ansible_link_dir }}:*}" ]; then
+          export PATH={{ dev_ansible_link_dir }}:$PATH
+      fi
+    state: present
+    marker: '# == {mark} ANSIBLE PATHS =='
+  when: dev_ansible_link_dir |d('')
+
+- name: alias for ansible-playbook
+  lineinfile:
+    path: ~/.local/bashrc/4alias.sh
+    line: "alias ap='ansible-playbook'"
+...
