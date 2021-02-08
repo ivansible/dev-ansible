@@ -1,6 +1,8 @@
 ansible==2.9.14
 docker
 mitogen<0.3
+# screw you cryptography! why require rust??
+cryptography<3.4
 # tests
 molecule[docker]<3.2
 ansible-test
