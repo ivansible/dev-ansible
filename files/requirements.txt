@@ -13,7 +13,6 @@ pytest-testinfra
 flake8
 # utils
 ansible-inventory-grapher
-git+https://github.com/ivandeex/ansigenome.git@master
 # extensions
 pywinrm
 passlib
