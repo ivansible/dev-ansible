@@ -25,14 +25,14 @@
     src: molecule-target.patch
     dest: "{{ dev_ansible_dir }}/site-packages/molecule/command/base.py"
     backup: true
-  ignore_errors: true
+  failed_when: false
 
 - name: patch ansible restconf (fix "JSON object must be str")
   patch:
     src: ansible-restconf.patch
     dest: "{{ dev_ansible_dir }}/site-packages/ansible/plugins/httpapi/restconf.py"
     backup: true
-  ignore_errors: true
+  failed_when: false
   ## the issue manifests itself as error "JSON object must be str"
   ## in the custom restconf_config2 module used by ndm- keenetic roles
   ## because in python 3.5 on xenial json.loads() accepts only type 'str';
@@ -46,5 +46,5 @@
     src: mitogen-shutdown.patch
     dest: "{{ dev_ansible_dir }}/site-packages/mitogen/core.py"
     backup: true
-  ignore_errors: true
+  failed_when: false
 ...

@@ -1,4 +1,4 @@
-ansible==2.9.18
+ansible==2.9.21
 docker
 mitogen<0.3
 # screw you cryptography! why require rust??
