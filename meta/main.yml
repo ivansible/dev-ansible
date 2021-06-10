@@ -1,6 +1,6 @@
 ---
 dependencies:
-  - ivansible.lin_base    # for variable hide_secrets
+  - ivansible.lin_base    # for variables hide_secrets, lin_use_rsyslog, etc
 
 galaxy_info:
   role_name: dev_ansible

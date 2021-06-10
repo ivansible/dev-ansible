@@ -1,0 +1,36 @@
+---
+- name: configure syslog for ansible
+  copy:
+    dest: /etc/rsyslog.d/34-ansible.conf
+    content: |
+      :programname,contains,"mitogen" /var/log/ansible.log
+      & stop
+      :msg,contains,"ansible-" /var/log/ansible.log
+      & stop
+    force: true
+    mode: 0644
+  notify: restart syslog service
+
+- name: rotate ansible log file
+  copy:
+    dest: /etc/logrotate.d/ansible
+    content: |
+      /var/log/ansible.log {
+          weekly
+          maxsize 1M
+          missingok
+          rotate 4
+          notifempty
+          {{ commentout }}compress
+          {{ commentout }}delaycompress
+          sharedscripts
+          postrotate
+              invoke-rc.d rsyslog rotate > /dev/null 2> /dev/null
+          endscript
+      }
+    force: true
+    mode: 0644
+  vars:
+    commentout: "{{ compress |ternary('','#') }}"
+    compress: "{{ lin_compress_logs |bool or lin_compress_logs is none }}"
+...

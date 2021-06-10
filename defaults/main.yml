@@ -7,6 +7,7 @@ dev_ansible_package_list: "{{ dev_ansible_dir |dirname }}/ansible-requirements.t
 dev_ansible_link_dir: "{{ ansible_user_dir }}/bin"
 
 dev_ansible_update_bashrc: true
+dev_ansible_use_rsyslog: "{{ lin_use_rsyslog |bool }}"
 
 dev_ansible_python: python3
 

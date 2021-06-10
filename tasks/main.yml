@@ -26,5 +26,11 @@
       import_tasks: aliases.yml
       when: dev_ansible_update_bashrc |bool
       tags: dev_ansible_bashrc
+
+    - name: setup syslog rules for ansible
+      import_tasks: syslog.yml
+      become: true
+      when: dev_ansible_use_rsyslog |bool
+      tags: dev_ansible_syslog
   tags: dev_ansible_all
 ...

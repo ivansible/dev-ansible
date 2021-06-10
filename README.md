@@ -50,6 +50,7 @@ This flag enables patching ansible, mitogen and molecule:
 - `dev_ansible_patch` -- apply patches to ansible, mitogen and molecule
 - `dev_ansible_links` -- create links to ansible binaries
 - `dev_ansible_bashrc` -- update path in the local profile
+- `dev_ansible_syslog` -- configure syslog for ansible and mitogen
 - `dev_ansible_all` -- all of above
 
 
