@@ -1,10 +1,11 @@
-ansible==2.9.21
+ansible==2.10.7
 docker
-mitogen<0.3
+mitogen==0.3.2
 # screw you cryptography! why require rust??
 cryptography<3.4
 # tests
-molecule[docker]<3.2
+molecule==3.4.1
+molecule-docker==1.0.2
 ansible-test
 ansible-lint
 yamllint
