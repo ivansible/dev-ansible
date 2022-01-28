@@ -17,6 +17,8 @@ ansible-inventory-grapher
 # extensions
 pywinrm
 passlib
+# MarkupSafe 2.0.1 fails to install with python 3.6 in molecule docker
+MarkupSafe==1.1.1
 # jmespath is required by json_query filter
 jmespath
 # netaddr is required by ipaddr filter

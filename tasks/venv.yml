@@ -24,15 +24,21 @@
 - name: upgrade to latest setuptools on bionic+
   pip:
     name: pip,setuptools,wheel
-    state: latest  # noqa 403
-  when:
-    - ansible_lsb.codename != 'xenial'
-    - _dev_ansible_venv_create is changed
+    state: "{{ needs_update |ternary('latest', 'present') }}"
+    virtualenv: "{{ dev_ansible_dir }}"
+    virtualenv_python: "{{ dev_ansible_python }}"
+  vars:
+    needs_update: "{{ just_created and not on_xenial }}"
+    just_created: "{{ _dev_ansible_venv_create is changed }}"
+    on_xenial: "{{ ansible_lsb.codename == 'xenial' }}"
 
 - name: setup virtual environment
   pip:
     requirements: "{{ dev_ansible_package_list }}"
     virtualenv: "{{ dev_ansible_dir }}"
     virtualenv_python: "{{ dev_ansible_python }}"
+  environment:
+    ## fix pip locale problems in molecule docker
+    LANG: en_US.UTF-8
   when: not stat_ansible_package.stat.exists
 ...
