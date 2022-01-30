@@ -6,7 +6,6 @@ cryptography<3.4
 # tests
 molecule==3.4.1
 molecule-docker==1.0.2
-ansible-test
 ansible-lint
 yamllint
 pytest
